@@ -78,8 +78,7 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     }
     
     public RaakaAine saveOrUpdate(RaakaAine object) throws SQLException {
-        // simply support saving -- disallow saving if task with 
-        // same name exists
+        // only support saving, not updating
         RaakaAine byName = findByName(object.getNimi());
 
         if (byName != null) {
@@ -87,7 +86,7 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
         }
 
         try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO RaakaAine (name) VALUES (?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO RaakaAine (nimi) VALUES (?)");
             stmt.setString(1, object.getNimi());
             stmt.executeUpdate();
         }
@@ -98,7 +97,7 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     
     private RaakaAine findByName(String name) throws SQLException {
         try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("SELECT id, name FROM RaakaAine WHERE name = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT id, nimi FROM RaakaAine WHERE nimi = ?");
             stmt.setString(1, name);
 
             try (ResultSet result = stmt.executeQuery()) {
@@ -123,6 +122,6 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     }
     
     public RaakaAine createFromRow(ResultSet resultSet) throws SQLException {
-        return new RaakaAine(resultSet.getInt("id"), resultSet.getString("name"));
+        return new RaakaAine(resultSet.getInt("id"), resultSet.getString("nimi"));
     }
 }

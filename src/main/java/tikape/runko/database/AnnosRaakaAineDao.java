@@ -85,7 +85,7 @@ public class AnnosRaakaAineDao {
     
     private AnnosRaakaAine findByCombination(Integer annosId, Integer raakaAineId) throws SQLException {
         try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("SELECT id, annos_id, annos_nimi, raaka_aine_id, raaka_aine_nimi, jarjestys, maara, ohje FROM AnnosRaakaAine WHERE annosId = ? AND raakaAineId = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT id, annos_id, annos_nimi, raaka_aine_id, raaka_aine_nimi, jarjestys, maara, ohje FROM AnnosRaakaAine WHERE annos_id = ? AND raaka_aine_id = ?");
             stmt.setInt(1, annosId);
             stmt.setInt(2, raakaAineId);
 

@@ -86,7 +86,7 @@ public class AnnosDao implements Dao<Annos, Integer> {
         }
 
         try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Annos (name) VALUES (?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Annos (nimi) VALUES (?)");
             stmt.setString(1, object.getNimi());
             stmt.executeUpdate();
         }
@@ -97,7 +97,7 @@ public class AnnosDao implements Dao<Annos, Integer> {
     
     private Annos findByName(String name) throws SQLException {
         try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("SELECT id, name FROM Annos WHERE name = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT id, nimi FROM Annos WHERE nimi = ?");
             stmt.setString(1, name);
 
             try (ResultSet result = stmt.executeQuery()) {
@@ -111,7 +111,7 @@ public class AnnosDao implements Dao<Annos, Integer> {
     }
     
     public Annos createFromRow(ResultSet resultSet) throws SQLException {
-        return new Annos(resultSet.getInt("id"), resultSet.getString("name"));
+        return new Annos(resultSet.getInt("id"), resultSet.getString("nimi"));
     }
     
     
