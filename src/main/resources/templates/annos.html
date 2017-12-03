@@ -11,15 +11,15 @@
         <h2>Raaka-aineet</h2>
         
         <ul>
-            <li th:each="raakaAine : ${raakaAineet}">
-                <span th:text="${raakaAine.nimi}">Raaka-aineen nimi</span>, <span th:text="${raakaAine.maara}">Raaka-aineen määrä</span>
+            <li th:each="annosRaakaAine : ${annosRaakaAineet}">
+                <span th:text="${annosRaakaAine.nimi}">Raaka-aineen nimi</span>, <span th:text="${annosRaakaAine.maara}">Raaka-aineen määrä</span>
             </li>
         </ul>
         
         <h2>Ohje</h2>
         <ul>
-            <li th:each="raakaAine : ${raakaAineet}">
-                <span th:text="${raakaAine.ohje}">Raaka-aineen ohje</span>
+            <li th:each="annosRaakaAine : ${annosRaakaAine}">
+                <span th:text="${annosRaakaAine.ohje}">Raaka-aineen ohje</span>
             </li>
         </ul>
         <p>
