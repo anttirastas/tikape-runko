@@ -52,15 +52,16 @@ public class Database {
         lista.add("INSERT INTO RaakaAine (nimi) VALUES ('Omena');");
         lista.add("INSERT INTO RaakaAine (nimi) VALUES ('Vesi');");
         lista.add("CREATE TABLE AnnosRaakaAine (id integer PRIMARY KEY, annos_id integer, "
-                + "raaka_aine_id integer, jarjestys integer, maara varchar(20), ohje varchar(255),"
+                + "annos_nimi varchar(255), raaka_aine_id integer, raaka_aine_nimi varchar(255), "
+                + "jarjestys integer, maara varchar(20), ohje varchar(255),"
                 + "FOREIGN KEY (annos_id) REFERENCES Annos(id), FOREIGN KEY (raaka_aine_id) "
                 + "REFERENCES RaakaAine(id));");
         
-        lista.add("INSERT INTO AnnosRaakaAine (annos_id, raaka_aine_id, jarjestys, maara, ohje) VALUES (1, 1, 1, '1 kpl', 'Pilko banaani blenderiin.');");
-        lista.add("INSERT INTO AnnosRaakaAine (annos_id, raaka_aine_id, jarjestys, maara, ohje) VALUES (1, 2, 2, '2 teelusikallista', 'Lisää blenderiin chlorella.');");
-        lista.add("INSERT INTO AnnosRaakaAine (annos_id, raaka_aine_id, jarjestys, maara, ohje) VALUES (1, 3, 3, '1 ruokalusikallinen', 'Lisää blenderiin "
+        lista.add("INSERT INTO AnnosRaakaAine (annos_id, annos_nimi, raaka_aine_id, raaka_aine_nimi, jarjestys, maara, ohje) VALUES (1, 'Vihersmoothie', 1, 'Banaani', 1, '1 kpl', 'Pilko banaani blenderiin.');");
+        lista.add("INSERT INTO AnnosRaakaAine (annos_id, annos_nimi, raaka_aine_id, raaka_aine_nimi, jarjestys, maara, ohje) VALUES (1, 'Vihersmoothie', 2, 'Chlorella', 2, '2 teelusikallista', 'Lisää blenderiin chlorella.');");
+        lista.add("INSERT INTO AnnosRaakaAine (annos_id, annos_nimi, raaka_aine_id, raaka_aine_nimi, jarjestys, maara, ohje) VALUES (1, 'Vihersmoothie', 3, 'Vihersmoothiejauhe', 3, '1 ruokalusikallinen', 'Lisää blenderiin "
                 + "vihersmoothiejauhe.');");
-        lista.add("INSERT INTO AnnosRaakaAine (annos_id, raaka_aine_id, jarjestys, maara, ohje) VALUES (1, 7, 4, 'sopivasti', 'Lisää lopuksi sopivasti vettä "
+        lista.add("INSERT INTO AnnosRaakaAine (annos_id, annos_nimi, raaka_aine_id, raaka_aine_nimi, jarjestys, maara, ohje) VALUES (1, 'Vihersmoothie', 7, 'Vesi', 4, 'sopivasti', 'Lisää lopuksi sopivasti vettä "
                 + "ja sekoita aineksia blenderissä noin 10 sekunnin ajan.');");
         
 
