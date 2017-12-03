@@ -117,7 +117,7 @@ public class AnnosRaakaAineDao {
     // public AnnosRaakaAine(Integer id, Integer annosId, Integer raakaAineId, Integer jarjestys, String maara, String ohje)
     
     public AnnosRaakaAine createFromRow(ResultSet resultSet) throws SQLException {
-        return new AnnosRaakaAine(resultSet.getInt("id"), resultSet.getInt("annosId"), resultSet.getInt("raakaAineId"), resultSet.getInt("jarjestys"), resultSet.getString("maara"), resultSet.getString("ohje"));
+        return new AnnosRaakaAine(resultSet.getInt("id"), resultSet.getInt("annos_id"), resultSet.getInt("raaka_aine_id"), resultSet.getInt("jarjestys"), resultSet.getString("maara"), resultSet.getString("ohje"));
     }
     
 }
