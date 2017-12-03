@@ -13,15 +13,19 @@ public class AnnosRaakaAine implements Comparable<AnnosRaakaAine> {
     
     private Integer id;
     private Integer annosId;
+    private String annosNimi;
     private Integer raakaAineId;
+    private String raakaAineNimi;
     private Integer jarjestys;
     private String maara;
     private String ohje;
 
-    public AnnosRaakaAine(Integer id, Integer annosId, Integer raakaAineId, Integer jarjestys, String maara, String ohje) {
+    public AnnosRaakaAine(Integer id, Integer annosId, String annosNimi, Integer raakaAineId, String raakaAineNimi, Integer jarjestys, String maara, String ohje) {
         this.id = id;
         this.annosId = annosId;
+        this.annosNimi = annosNimi;
         this.raakaAineId = raakaAineId;
+        this.raakaAineNimi = raakaAineNimi;
         this.jarjestys = jarjestys;
         this.maara = maara;
         this.ohje = ohje;
@@ -35,8 +39,16 @@ public class AnnosRaakaAine implements Comparable<AnnosRaakaAine> {
         return annosId;
     }
 
+    public String getAnnosNimi() {
+        return annosNimi;
+    }
+
     public Integer getRaakaAineId() {
         return raakaAineId;
+    }
+
+    public String getRaakaAineNimi() {
+        return raakaAineNimi;
     }
 
     public Integer getJarjestys() {
