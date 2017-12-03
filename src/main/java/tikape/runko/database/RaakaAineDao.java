@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import tikape.runko.domain.Annos;
+import tikape.runko.domain.AnnosRaakaAine;
 import tikape.runko.domain.RaakaAine;
 
 /**
@@ -76,5 +77,52 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public RaakaAine saveOrUpdate(RaakaAine object) throws SQLException {
+        // simply support saving -- disallow saving if task with 
+        // same name exists
+        RaakaAine byName = findByName(object.getNimi());
+
+        if (byName != null) {
+            return byName;
+        }
+
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO RaakaAine (name) VALUES (?)");
+            stmt.setString(1, object.getNimi());
+            stmt.executeUpdate();
+        }
+
+        return findByName(object.getNimi());
+
+    }
     
+    private RaakaAine findByName(String name) throws SQLException {
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT id, name FROM RaakaAine WHERE name = ?");
+            stmt.setString(1, name);
+
+            try (ResultSet result = stmt.executeQuery()) {
+                if (!result.next()) {
+                    return null;
+                }
+
+                return createFromRow(result);
+            }
+        }
+    }
+    
+    public List<RaakaAine> getRaakaAineet(List<AnnosRaakaAine> annosRaakaAineet) throws SQLException {
+        List<RaakaAine> raakaAineet = new ArrayList<>();
+        
+        for (AnnosRaakaAine annosRaakaAine : annosRaakaAineet) {
+            int raakaAineId = annosRaakaAine.getRaakaAineId();
+            raakaAineet.add(findOne(raakaAineId));
+        }
+        
+        return raakaAineet;
+    }
+    
+    public RaakaAine createFromRow(ResultSet resultSet) throws SQLException {
+        return new RaakaAine(resultSet.getInt("id"), resultSet.getString("name"));
+    }
 }

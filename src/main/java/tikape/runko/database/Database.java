@@ -42,13 +42,26 @@ public class Database {
         lista.add("CREATE TABLE Annos (id integer PRIMARY KEY, nimi varchar(255));");
         lista.add("INSERT INTO Annos (nimi) VALUES ('Vihersmoothie');");
         lista.add("INSERT INTO Annos (nimi) VALUES ('Kaakaosmoothie');");
+        
         lista.add("CREATE TABLE RaakaAine (id integer PRIMARY KEY, nimi varchar(255));");
         lista.add("INSERT INTO RaakaAine (nimi) VALUES ('Banaani');");
         lista.add("INSERT INTO RaakaAine (nimi) VALUES ('Chlorella');");
-        lista.add("INSERT INTO RaakaAine (nimi) VALUES ('Vihersmoothie-jauhe');");
+        lista.add("INSERT INTO RaakaAine (nimi) VALUES ('Vihersmoothiejauhe');");
         lista.add("INSERT INTO RaakaAine (nimi) VALUES ('Raakakaakaojauhe');");
         lista.add("INSERT INTO RaakaAine (nimi) VALUES ('Maca-jauhe');");
         lista.add("INSERT INTO RaakaAine (nimi) VALUES ('Omena');");
+        lista.add("INSERT INTO RaakaAine (nimi) VALUES ('Vesi');");
+        lista.add("CREATE TABLE AnnosRaakaAine (id integer PRIMARY KEY, annos_id integer, "
+                + "raaka_aine_id integer, jarjestys integer, maara varchar(20), ohje varchar(255),"
+                + "FOREIGN KEY (annos_id) REFERENCES Annos(id), FOREIGN KEY (raaka_aine_id) "
+                + "REFERENCES RaakaAine(id));");
+        
+        lista.add("INSERT INTO AnnosRaakaAine (annos_id, raaka_aine_id, jarjestys, maara, ohje) VALUES (1, 1, 1, '1 kpl', 'Pilko banaani blenderiin.');");
+        lista.add("INSERT INTO AnnosRaakaAine (annos_id, raaka_aine_id, jarjestys, maara, ohje) VALUES (1, 2, 2, '2 teelusikallista', 'Lisää blenderiin chlorella.');");
+        lista.add("INSERT INTO AnnosRaakaAine (annos_id, raaka_aine_id, jarjestys, maara, ohje) VALUES (1, 3, 3, '1 ruokalusikallinen', 'Lisää blenderiin "
+                + "vihersmoothiejauhe.');");
+        lista.add("INSERT INTO AnnosRaakaAine (annos_id, raaka_aine_id, jarjestys, maara, ohje) VALUES (1, 7, 4, 'sopivasti', 'Lisää lopuksi sopivasti vettä "
+                + "ja sekoita aineksia blenderissä noin 10 sekunnin ajan.');");
         
 
         return lista;

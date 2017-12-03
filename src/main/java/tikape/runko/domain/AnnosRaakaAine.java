@@ -9,7 +9,7 @@ package tikape.runko.domain;
  *
  * @author antti
  */
-public class AnnosRaakaAine {
+public class AnnosRaakaAine implements Comparable<AnnosRaakaAine> {
     
     private Integer id;
     private Integer annosId;
@@ -75,5 +75,8 @@ public class AnnosRaakaAine {
         this.ohje = ohje;
     }
     
+    public int compareTo(AnnosRaakaAine a) {
+        return this.jarjestys - a.getJarjestys();
+    }
     
 }

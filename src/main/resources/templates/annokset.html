@@ -25,11 +25,6 @@
         </form>
         
         
-        <ul>
-            <li th:each="raakaAine : ${raakaAineet}">
-                <span th:text="${raakaAine.ohje}">Raaka-aineen ohje</span>
-            </li>
-        </ul>
         <p>
         </p>
         
@@ -49,12 +44,14 @@
             </select>
             
             
-
-            <input type="text" name="Järjestys"/><br/>
+            <p>Järjestys</p>
+            <input type="text" name="jarjestys"/><br/>
             
-            <input type="text" name="Määrä"/><br/>
+            <p>Määrä</p>
+            <input type="text" name="maara"/><br/>
             
-            <input type="text" name="Ohje"/><br/>
+            <p>Ohje</p>
+            <input type="text" name="ohje"/><br/>
             
             <input type="submit" value="Lisää"/>
         </form>
