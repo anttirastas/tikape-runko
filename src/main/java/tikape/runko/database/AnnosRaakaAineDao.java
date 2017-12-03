@@ -37,12 +37,14 @@ public class AnnosRaakaAineDao {
         while (rs.next()) {
             Integer id = rs.getInt("id");
             Integer annosId = rs.getInt("annos_id");
+            String annosNimi = rs.getString("annos_nimi");
             Integer raakaAineId = rs.getInt("raaka_aine_id");
+            String raakaAineNimi = rs.getString("raaka_aine_nimi");
             Integer jarjestys = rs.getInt("jarjestys");
             String maara = rs.getString("maara");
             String ohje = rs.getString("ohje");
 
-            annosRaakaAineet.add(new AnnosRaakaAine(id, annosId, raakaAineId, jarjestys, maara, ohje));
+            annosRaakaAineet.add(new AnnosRaakaAine(id, annosId, annosNimi, raakaAineId, raakaAineNimi, jarjestys, maara, ohje));
         }
 
         rs.close();
@@ -66,12 +68,14 @@ public class AnnosRaakaAineDao {
         }
 
         try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO AnnosRaakaAine (annos_id, raaka_aine_id, jarjestys, maara, ohje) VALUES (?, ?, ?, ?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO AnnosRaakaAine (annos_id, annos_nimi, raaka_aine_id, raaka_aine_nimi, jarjestys, maara, ohje) VALUES (?, ?, ?, ?, ?)");
             stmt.setInt(1, object.getAnnosId());
-            stmt.setInt(2, object.getRaakaAineId());
-            stmt.setInt(3, object.getJarjestys());
-            stmt.setString(4, object.getMaara());
-            stmt.setString(5, object.getOhje());
+            stmt.setString(2, object.getAnnosNimi());
+            stmt.setInt(3, object.getRaakaAineId());
+            stmt.setString(4, object.getRaakaAineNimi());
+            stmt.setInt(5, object.getJarjestys());
+            stmt.setString(6, object.getMaara());
+            stmt.setString(7, object.getOhje());
             stmt.executeUpdate();
         }
 
@@ -81,7 +85,7 @@ public class AnnosRaakaAineDao {
     
     private AnnosRaakaAine findByCombination(Integer annosId, Integer raakaAineId) throws SQLException {
         try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("SELECT id, annos_id, raaka_aine_id, jarjestys, maara, ohje FROM AnnosRaakaAine WHERE annosId = ? AND raakaAineId = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT id, annos_id, annos_nimi, raaka_aine_id, raaka_aine_nimi, jarjestys, maara, ohje FROM AnnosRaakaAine WHERE annosId = ? AND raakaAineId = ?");
             stmt.setInt(1, annosId);
             stmt.setInt(2, raakaAineId);
 
@@ -99,7 +103,7 @@ public class AnnosRaakaAineDao {
         List<AnnosRaakaAine> annosRaakaAineet = new ArrayList<>();
         
         try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("SELECT id, annos_id, raaka_aine_id, jarjestys, maara, ohje FROM AnnosRaakaAine WHERE annos_id = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT id, annos_id, annos_nimi, raaka_aine_id, raaka_aine_nimi, jarjestys, maara, ohje FROM AnnosRaakaAine WHERE annos_id = ?");
             stmt.setInt(1, annosId);
 
             try (ResultSet result = stmt.executeQuery()) {
@@ -117,7 +121,7 @@ public class AnnosRaakaAineDao {
     // public AnnosRaakaAine(Integer id, Integer annosId, Integer raakaAineId, Integer jarjestys, String maara, String ohje)
     
     public AnnosRaakaAine createFromRow(ResultSet resultSet) throws SQLException {
-        return new AnnosRaakaAine(resultSet.getInt("id"), resultSet.getInt("annos_id"), resultSet.getInt("raaka_aine_id"), resultSet.getInt("jarjestys"), resultSet.getString("maara"), resultSet.getString("ohje"));
+        return new AnnosRaakaAine(resultSet.getInt("id"), resultSet.getInt("annos_id"), resultSet.getString("annos_nimi"), resultSet.getInt("raaka_aine_id"), resultSet.getString("raaka_aine_nimi"), resultSet.getInt("jarjestys"), resultSet.getString("maara"), resultSet.getString("ohje"));
     }
     
 }
