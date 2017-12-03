@@ -99,7 +99,7 @@ public class AnnosRaakaAineDao {
         List<AnnosRaakaAine> annosRaakaAineet = new ArrayList<>();
         
         try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("SELECT id, annos_id, raaka_aine_id, jarjestys, maara, ohje FROM AnnosRaakaAine WHERE annosId = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT id, annos_id, raaka_aine_id, jarjestys, maara, ohje FROM AnnosRaakaAine WHERE annos_id = ?");
             stmt.setInt(1, annosId);
 
             try (ResultSet result = stmt.executeQuery()) {
