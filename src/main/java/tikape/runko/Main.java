@@ -62,12 +62,14 @@ public class Main {
         
         post("/annokset/:id", (req, res) -> {
            Integer annosId = Integer.parseInt(req.params(":id"));
+           String annosNimi = annokset.findOne(annosId).getNimi();
            Integer raakaAineId = Integer.parseInt(req.queryParams("raakaAineId"));
+           String raakaAineNimi = raakaAineet.findOne(raakaAineId).getNimi();
            Integer jarjestys = Integer.parseInt(req.queryParams("raakaAineId"));
            String maara = (req.queryParams("raakaAineId"));
            String ohje = (req.queryParams("raakaAineId"));
            
-           AnnosRaakaAine ar = new AnnosRaakaAine(-1, annosId, raakaAineId, jarjestys, maara, ohje);
+           AnnosRaakaAine ar = new AnnosRaakaAine(-1, annosId, annosNimi, raakaAineId, raakaAineNimi, jarjestys, maara, ohje);
            
            annosRaakaAineet.saveOrUpdate(ar);
            
