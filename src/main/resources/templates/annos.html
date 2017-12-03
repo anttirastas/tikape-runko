@@ -12,13 +12,13 @@
         
         <ul>
             <li th:each="annosRaakaAine : ${annosRaakaAineet}">
-                <span th:text="${annosRaakaAine.nimi}">Raaka-aineen nimi</span>, <span th:text="${annosRaakaAine.maara}">Raaka-aineen määrä</span>
+                <span th:text="${annosRaakaAine.raakaAineNimi}">Raaka-aineen nimi</span>, <span th:text="${annosRaakaAine.maara}">Raaka-aineen määrä</span>
             </li>
         </ul>
         
         <h2>Ohje</h2>
         <ul>
-            <li th:each="annosRaakaAine : ${annosRaakaAine}">
+            <li th:each="annosRaakaAine : ${annosRaakaAineet}">
                 <span th:text="${annosRaakaAine.ohje}">Raaka-aineen ohje</span>
             </li>
         </ul>
