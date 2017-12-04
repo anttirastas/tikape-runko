@@ -68,7 +68,7 @@ public class AnnosRaakaAineDao {
         }
 
         try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO AnnosRaakaAine (annos_id, annos_nimi, raaka_aine_id, raaka_aine_nimi, jarjestys, maara, ohje) VALUES (?, ?, ?, ?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO AnnosRaakaAine (annos_id, annos_nimi, raaka_aine_id, raaka_aine_nimi, jarjestys, maara, ohje) VALUES (?, ?, ?, ?, ?, ?, ?)");
             stmt.setInt(1, object.getAnnosId());
             stmt.setString(2, object.getAnnosNimi());
             stmt.setInt(3, object.getRaakaAineId());
@@ -124,4 +124,19 @@ public class AnnosRaakaAineDao {
         return new AnnosRaakaAine(resultSet.getInt("id"), resultSet.getInt("annos_id"), resultSet.getString("annos_nimi"), resultSet.getInt("raaka_aine_id"), resultSet.getString("raaka_aine_nimi"), resultSet.getInt("jarjestys"), resultSet.getString("maara"), resultSet.getString("ohje"));
     }
     
+    public void deleteByAnnosId(Integer key) throws SQLException {
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM AnnosRaakaAine WHERE annos_id = ?");
+            stmt.setInt(1, key);
+            stmt.executeUpdate();
+        }
+    }
+    
+    public void deleteByRaakaAineId(Integer key) throws SQLException {
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM AnnosRaakaAine WHERE raaka_aine_id = ?");
+            stmt.setInt(1, key);
+            stmt.executeUpdate();
+        }
+    }
 }

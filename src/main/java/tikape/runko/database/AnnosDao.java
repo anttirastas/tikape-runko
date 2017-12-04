@@ -73,7 +73,11 @@ public class AnnosDao implements Dao<Annos, Integer> {
 
     @Override
     public void delete(Integer key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Annos WHERE id = ?");
+            stmt.setInt(1, key);
+            stmt.executeUpdate();
+        }
     }
     
     public Annos saveOrUpdate(Annos object) throws SQLException {

@@ -9,11 +9,26 @@
     <body>
         <h1>Smoothiet</h1>
 
+        <!--
         <ul>
             <li th:each="annos : ${annokset}">
-                <span th:text="${annos.nimi}">Annoksen nimi</span> <a th:href="${'/annokset/' + annos.id}">linkki</a>
+                <a th:href="${'/annokset/' + annos.id}"><span th:text="${annos.nimi}">Annoksen nimi</span></a>
             </li>
         </ul>
+        
+        -->
+        
+        <ul>
+            <li th:each="annos : ${annokset}">
+                <form th:action="@{~/annokset/{id}(id=${annos.id})}" method="post">
+                    <a th:href="${'/annokset/' + annos.id}"><span th:text="${annos.nimi}">Annoksen nimi</span></a>
+                    <input type="hidden" th:name="annosId" th:value="${annos.id}"/>
+                    <input type="submit" value="Poista"/>
+                </form>
+                <p></p>
+            </li>
+        </ul>
+        
         
         <p></p>
         
@@ -21,7 +36,8 @@
         
         <form method="POST" action="/annokset">
             <input type="text" name="name"/><br/>
-            <input type="submit" value="Lisää"/>
+            <p></p>
+            <input type="submit" value="Lisää"/><br/>
         </form>
         
         
@@ -30,65 +46,33 @@
         
         <h3>Lisää raaka-aineita</h3>
         
-        <ul>
-            <li th:each="annos : ${annokset}">
-                <span th:text="${annos.nimi}">Annos</span>
-                <form th:action="@{~/annokset/{id}(id=${annos.id})}" method="post">
-                    <select name="annosId">
-                        <option th:each="annos: ${annokset}" th:value="${annos.id}" th:text="${annos.nimi}">
-                            annos
-                        </option>
-                    </select>
+        <form action="/annosraaka-aineet" method="post">
+            <select name="annosId">
+                <option th:each="annos: ${annokset}" th:value="${annos.id}" th:text="${annos.nimi}">
+                    annos
+                </option>
+            </select>
+            <select name="raakaAineId">
+                <option th:each="raakaAine: ${raakaAineet}" th:value="${raakaAine.id}" th:text="${raakaAine.nimi}">
+                    raaka-aine
+                </option>
+            </select>
+            <br/>
 
-                    <select name="raakaAineId">
-                        <option th:each="raakaAine: ${raakaAineet}" th:value="${raakaAine.id}" th:text="${raakaAine.nimi}">
-                            raaka-aine
-                        </option>
-                    </select>
-               
-            
-                    <p>Järjestys</p>
-                    <input type="text" name="jarjestys"/><br/>
+            <p>Järjestys</p>
+            <input type="text" name="jarjestys"/><br/>
 
-                    <p>Määrä</p>
-                    <input type="text" name="maara"/><br/>
+            <p>Määrä</p>
+            <input type="text" name="maara"/><br/>
 
-                    <p>Ohje</p>
-                    <input type="text" name="ohje"/><br/>
-
-                    <input type="submit" value="Lisää"/>
-                </form>
-            </li>
-        </ul>
+            <p>Ohje</p>
+            <input type="text" name="ohje"/><br/>
+            <p></p>
+            <input type="submit" value="Lisää"/><br/>
+        </form>
         
-            <!--
-            <ul>
-            <li th:each="task : ${tasks}">
-                <span th:text="${task.name}">Task</span>
-                <form th:action="@{~/categories/{id}(id=${task.id})}" method="post">
-                    <select name="categoryId">
-                        <option th:each="category: ${categories}" th:value="${category.id}" th:text="${category.name}">
-                            category
-                        </option>
-                    </select>
-                    <input type="submit" value="Categorize task!"/>
-                </form>
-                <form th:action="@{~/tasks/{id}(id=${task.id})}" method="post">
-                    <select name="userId">
-                        <option th:each="user: ${users}" th:value="${user.id}" th:text="${user.name}">
-                            user
-                        </option>
-                    </select>
-                    <input type="submit" value="Assign task!"/>
-                </form>
-            </li>
-        </ul>
-            -->
-            
-            
-           
-        
-        
-        <a href="/">Smoothielistaukseen</a>
+        <p>
+            <a href="/">Smoothielistaukseen</a>
+        </p>
     </body>
 </html>
